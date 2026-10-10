@@ -152,9 +152,13 @@ BF16 LoRA r64, 2 GPUs: 100-step PASS, adapter reload PASS
 BF16 LoRA r128, 2 GPUs: OOM after step 25 evaluation
 NF4 QLoRA r128, 1 GPU: 100-step PASS, adapter reload PASS
 NF4 QLoRA r256, 1 GPU: one-step OOM
-NF4 QLoRA r32, 2 GPUs: non-finite gradients in 100-step run
+NF4 QLoRA r32, 2 GPUs: FLAKY; one NaN run, later exact 100-step PASS
 ```
 
 If your result differs, compare the model revision, package versions, actual
 sequence length, GPU visibility, and effective batch before changing multiple
 parameters.
+
+For dual-GPU NF4 experiments, use the fail-fast launcher documented in
+[NF4_DDP_NAN_INVESTIGATION.md](NF4_DDP_NAN_INVESTIGATION.md) so a non-finite
+gradient norm aborts before all adapter gradients are contaminated.

@@ -22,15 +22,17 @@ Need 4-bit NF4?  1 x W7900, QLoRA rank 128
 ```
 
 **The NF4 recommendation is one W7900, not two.** We tested two-card NF4
-training as well, but rank 32 produced non-finite gradients during the
-100-step run. With the same global batch size, two-card NF4 was also slower
-than the single-card path in this microbenchmark.
+training as well. One rank-32 run produced non-finite gradients, while a later
+exact 100-step reproduction passed and its adapter reloaded successfully. We
+therefore classify it as flaky, not a deterministic rank-32 failure. With the
+same global batch size, two-card NF4 was also slower than the single-card path
+in this microbenchmark.
 
 ## 中文结论
 
 - 如果必须使用 BF16 基座：使用 **两张 W7900 + LoRA rank 64 + ZeRO-3**。
 - 如果希望降低硬件要求：使用 **一张 W7900 + NF4 QLoRA rank 128**。
-- NF4 QLoRA 的推荐方案是单卡，不是双卡。双卡 NF4 在 rank 32 的百步实验中出现了 NaN。
+- NF4 QLoRA 的推荐方案是单卡，不是双卡。双卡 NF4 rank 32 一次出现 NaN，后续同条件百步复现通过，因此属于 flaky，而不是必现失败。
 - 上述 rank 是完成系统验证的最大 2 倍档位，不代表真实业务质量一定最优。
 
 ### Important limits
@@ -58,6 +60,9 @@ micro batch 1, effective global batch 4, gradient checkpointing, SDPA, and
 
 See [docs/RESULTS.md](docs/RESULTS.md) for the full matrix and failure
 boundaries.
+
+The rank-32 NaN investigation is documented in
+[docs/NF4_DDP_NAN_INVESTIGATION.md](docs/NF4_DDP_NAN_INVESTIGATION.md).
 
 ## Quick start
 

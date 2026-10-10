@@ -40,7 +40,7 @@ quality measurements.
 | ---: | --- | --- | --- |
 | 8 | PASS; 47,797/47,723 MB; 263.2 tok/s | PASS; 22,834 MB; 356.9 tok/s | PASS; 34,448/38,029 MB; 340.5 tok/s |
 | 16 | PASS; 46,509/46,435 MB; 251.9 tok/s | PASS; 24,728 MB; 357.9 tok/s | PASS; 34,691/34,692 MB; 345.6 tok/s |
-| 32 | PASS; 49,107/49,077 MB; 250.4 tok/s | PASS; 25,535 MB; 355.3 tok/s | FAIL; non-finite gradients from step 30 |
+| 32 | PASS; 49,107/49,077 MB; 250.4 tok/s | PASS; 25,535 MB; 355.3 tok/s | FLAKY; one NaN run, later 100-step PASS; 342.5 tok/s |
 | 64 | PASS; 48,791/48,763 MB; 247.8 tok/s | PASS; 29,504 MB; 353.3 tok/s | STOP; rank-32 gate failed |
 | 128 | OOM after step 25 evaluation | PASS; 38,324 MB; 347.1 tok/s | STOP; rank-32 gate failed |
 | 256 | P1 OOM | P1 OOM | P1 OOM |
@@ -69,8 +69,14 @@ the highest power-of-two NF4 rank that passed the full test; rank 256 failed P1.
 ### Why not two-card NF4?
 
 At the same effective global batch, dual-card NF4 did not outperform the
-single-card run. Rank 32 then produced NaN gradient norms and NaN evaluation
-loss. We therefore do not present two-card NF4 as the recommended path.
+single-card run. One rank-32 run produced NaN gradient norms and NaN evaluation
+loss, but a later exact 100-step reproduction passed and returned `42` after
+adapter reload. The result is therefore flaky and unresolved, not a
+deterministic rank-32 failure. We still do not present two-card NF4 as the
+default path because it was slower and has weaker stability evidence.
+
+See [NF4_DDP_NAN_INVESTIGATION.md](NF4_DDP_NAN_INVESTIGATION.md) for the raw
+evidence, upstream comparison, and fail-fast mitigation.
 
 ## Evidence status
 
@@ -80,6 +86,7 @@ P2: 15/15 candidate cells completed 10 steps
 P3 first run: 11 PASS, 1 FAIL, 1 OOM, 2 STOP
 P3 second run: 11/11 successful cells passed again
 Adapter reload: 11/11 passed, fixed response = 42
+Dual-GPU NF4 r32 follow-up: exact 100-step PASS, adapter reload = 42
 ```
 
 The raw 56 GB output directory is intentionally not committed. The repository

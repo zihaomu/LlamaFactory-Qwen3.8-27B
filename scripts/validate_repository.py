@@ -63,9 +63,15 @@ def main() -> None:
         "2 x W7900, BF16 LoRA, rank 64",
         "1 x W7900, NF4 QLoRA, rank 128",
         "The NF4 recommendation is one W7900, not two.",
+        "classify it as flaky, not a deterministic rank-32 failure",
     )
     if not all(text in readme for text in required):
         raise RuntimeError("README is missing a headline recommendation")
+    investigation = root / "docs" / "NF4_DDP_NAN_INVESTIGATION.md"
+    if not investigation.is_file() or "not a confirmed upstream bug" not in investigation.read_text(
+        encoding="utf-8"
+    ):
+        raise RuntimeError("The rank-32 NaN investigation is missing or incomplete")
     print("REPOSITORY_VALIDATION_PASS")
 
 

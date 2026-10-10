@@ -18,7 +18,7 @@
   ],
   "boundaries": [
     {"path": "bf16-lora-g2", "rank": 128, "status": "OOM", "detail": "4.32 GiB allocation failed after step 25 evaluation"},
-    {"path": "nf4-qlora-g2", "rank": 32, "status": "FAIL", "detail": "non-finite gradient norm from step 30"},
+    {"path": "nf4-qlora-g2", "rank": 32, "status": "FLAKY", "detail": "one run had non-finite gradients from step 30; later exact 100-step reproduction passed and adapter reload returned 42"},
     {"path": "bf16-lora-g2", "rank": 256, "status": "P1_OOM"},
     {"path": "nf4-qlora-g1", "rank": 256, "status": "P1_OOM"},
     {"path": "nf4-qlora-g2", "rank": 256, "status": "P1_OOM"}
