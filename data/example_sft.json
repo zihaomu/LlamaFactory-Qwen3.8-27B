@@ -1,0 +1,42 @@
+[
+  {
+    "instruction": "Add the two integers and return only the result.",
+    "input": "17 + 25",
+    "output": "42"
+  },
+  {
+    "instruction": "Rewrite the sentence more concisely.",
+    "input": "Because it is raining today, the meeting has been moved online.",
+    "output": "Today's rain moved the meeting online."
+  },
+  {
+    "instruction": "Return a JSON object with keys name and count.",
+    "input": "name is apple, count is 3",
+    "output": "{\"name\": \"apple\", \"count\": 3}"
+  },
+  {
+    "instruction": "Classify the sentiment as positive, neutral, or negative.",
+    "input": "The update works as expected.",
+    "output": "positive"
+  },
+  {
+    "instruction": "Convert the word to uppercase.",
+    "input": "rocm",
+    "output": "ROCM"
+  },
+  {
+    "instruction": "Return the larger number.",
+    "input": "-4, 11",
+    "output": "11"
+  },
+  {
+    "instruction": "Complete the sequence with one number.",
+    "input": "2, 4, 6, 8,",
+    "output": "10"
+  },
+  {
+    "instruction": "Answer with the chemical symbol only.",
+    "input": "gold",
+    "output": "Au"
+  }
+]

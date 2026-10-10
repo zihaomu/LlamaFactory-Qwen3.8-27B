@@ -1,0 +1,15 @@
+.venv/
+cache/
+logs/
+models/
+outputs/
+src/
+
+__pycache__/
+*.py[cod]
+*.log
+.env
+
+.DS_Store
+.vscode/
+.idea/

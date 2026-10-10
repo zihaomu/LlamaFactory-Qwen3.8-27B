@@ -1,0 +1,26 @@
+{
+  "model": "Qwen/Qwen3.8-27B",
+  "model_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+  "sequence_tokens": 512,
+  "effective_global_batch": 4,
+  "successful_profiles": [
+    {"path": "bf16-lora-g2", "rank": 8, "peak_vram_mb": [47797, 47723], "tokens_per_second": 263.168, "adapter_reload": true},
+    {"path": "bf16-lora-g2", "rank": 16, "peak_vram_mb": [46509, 46435], "tokens_per_second": 251.904, "adapter_reload": true},
+    {"path": "bf16-lora-g2", "rank": 32, "peak_vram_mb": [49107, 49077], "tokens_per_second": 250.368, "adapter_reload": true},
+    {"path": "bf16-lora-g2", "rank": 64, "peak_vram_mb": [48791, 48763], "tokens_per_second": 247.808, "adapter_reload": true},
+    {"path": "nf4-qlora-g1", "rank": 8, "peak_vram_mb": [22834], "tokens_per_second": 356.864, "adapter_reload": true},
+    {"path": "nf4-qlora-g1", "rank": 16, "peak_vram_mb": [24728], "tokens_per_second": 357.888, "adapter_reload": true},
+    {"path": "nf4-qlora-g1", "rank": 32, "peak_vram_mb": [25535], "tokens_per_second": 355.328, "adapter_reload": true},
+    {"path": "nf4-qlora-g1", "rank": 64, "peak_vram_mb": [29504], "tokens_per_second": 353.280, "adapter_reload": true},
+    {"path": "nf4-qlora-g1", "rank": 128, "peak_vram_mb": [38324], "tokens_per_second": 347.136, "adapter_reload": true},
+    {"path": "nf4-qlora-g2", "rank": 8, "peak_vram_mb": [34448, 38029], "tokens_per_second": 340.480, "adapter_reload": true},
+    {"path": "nf4-qlora-g2", "rank": 16, "peak_vram_mb": [34691, 34692], "tokens_per_second": 345.600, "adapter_reload": true}
+  ],
+  "boundaries": [
+    {"path": "bf16-lora-g2", "rank": 128, "status": "OOM", "detail": "4.32 GiB allocation failed after step 25 evaluation"},
+    {"path": "nf4-qlora-g2", "rank": 32, "status": "FAIL", "detail": "non-finite gradient norm from step 30"},
+    {"path": "bf16-lora-g2", "rank": 256, "status": "P1_OOM"},
+    {"path": "nf4-qlora-g1", "rank": 256, "status": "P1_OOM"},
+    {"path": "nf4-qlora-g2", "rank": 256, "status": "P1_OOM"}
+  ]
+}

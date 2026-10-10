@@ -1,0 +1,4 @@
+torch @ https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2.4/torch-2.7.1%2Brocm7.2.4.lw.git1dab218d-cp312-cp312-linux_x86_64.whl
+torchvision @ https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2.4/torchvision-0.22.1%2Brocm7.2.4.git59a3e1f9-cp312-cp312-linux_x86_64.whl
+torchaudio @ https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2.4/torchaudio-2.7.1%2Brocm7.2.4.git95c61b41-cp312-cp312-linux_x86_64.whl
+triton @ https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2.4/triton-3.3.1%2Brocm7.2.4.git28a7371e-cp312-cp312-linux_x86_64.whl
